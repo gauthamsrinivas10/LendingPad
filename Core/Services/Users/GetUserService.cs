@@ -25,5 +25,10 @@ namespace Core.Services.Users
         {
             return _userRepository.Get(userType, name, email);
         }
+
+        public IEnumerable<User> GetUsersByTag(string tag)
+        {
+            return _userRepository.GetUsersByTag(tag);
+        }
     }
 }

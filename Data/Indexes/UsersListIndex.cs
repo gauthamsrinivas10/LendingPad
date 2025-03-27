@@ -14,10 +14,13 @@ namespace Data.Indexes
                                   {
                                       user.Name,
                                       user.Email,
-                                      user.Type
+                                      user.Type,
+                                      user.Tags
                                   };
 
             Index(x => x.Type, FieldIndexing.NotAnalyzed);
+            Index(x => x.Tags, FieldIndexing.NotAnalyzed);
+
         }
     }
 }

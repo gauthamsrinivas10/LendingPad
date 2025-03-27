@@ -59,11 +59,7 @@ namespace BusinessEntities
         }
 
         public void SetEmail(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                throw new ArgumentNullException("Name was not provided.");
-            }
+        {            
             _email = email;
         }
 

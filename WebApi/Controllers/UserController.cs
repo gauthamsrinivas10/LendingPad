@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BusinessEntities;
@@ -28,8 +29,15 @@ namespace WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage CreateUser(Guid userId, [FromBody] UserModel model)
         {
-            var user = _createUserService.Create(userId, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
-            return Found(new UserData(user));
+            try
+            {
+                var user = _createUserService.Create(userId, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
+                return Found(new UserData(user));
+            }
+            catch (Exception)
+            {                
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while creating the user.");
+            }
         }
 
         [Route("{userId:guid}/update")]
@@ -40,9 +48,17 @@ namespace WebApi.Controllers
             if (user == null)
             {
                 return DoesNotExist();
+            } 
+            try
+            {
+                
+                _updateUserService.Update(user, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
+                return Found(new UserData(user));
             }
-            _updateUserService.Update(user, model.Name, model.Email, model.Type, model.AnnualSalary, model.Tags);
-            return Found(new UserData(user));
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while updating the user.");
+            }
         }
 
         [Route("{userId:guid}/delete")]
@@ -89,7 +105,20 @@ namespace WebApi.Controllers
         [HttpGet]
         public HttpResponseMessage GetUsersByTag(string tag)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var users = string.IsNullOrEmpty(tag) ?
+                    _getUserService.GetUsersByTag(string.Empty) :
+                    _getUserService.GetUsersByTag(tag);
+
+                            
+                var userDataList = users.Select(q => new UserData(q)).ToList(); 
+                return Found(userDataList); 
+            }
+            catch (Exception)
+            {                
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while fetching users by tag.");
+            }
         }
     }
 }

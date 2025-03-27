@@ -21,12 +21,19 @@ namespace Data.Repositories
 
         public void Save(T entity)
         {
-            _documentSession.Store(entity);
+            var existingEntity = _documentSession.Load<T>(entity.Id);
+
+            if (existingEntity != null)
+            {             
+                throw new InvalidOperationException($"Document with ID {entity.Id} already exists.");
+            }
+            _documentSession.Store(entity);            
         }
 
         public void Delete(T entity)
         {
-            _documentSession.Delete(entity);
+            _documentSession.Delete(entity);            
+
         }
 
         public T Get(Guid id)
