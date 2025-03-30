@@ -18,7 +18,7 @@ namespace WebApi
         public static void Register(HttpConfiguration config)
         {
             var container = new Container();
-            var lifestyle = Lifestyle.Scoped;
+            var lifestyle = Lifestyle.Singleton; //Changing to Singleton to retain the session across requests
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             var assembly = typeof(WebApiConfig).Assembly;

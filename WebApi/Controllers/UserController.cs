@@ -36,12 +36,12 @@ namespace WebApi.Controllers
             }
             catch (Exception)
             {                
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while creating the user.");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while creating the user. Review the input data");
             }
         }
 
         [Route("{userId:guid}/update")]
-        [HttpPost]
+        [HttpPut]
         public HttpResponseMessage UpdateUser(Guid userId, [FromBody] UserModel model)
         {
             var user = _getUserService.GetUser(userId);
@@ -57,7 +57,7 @@ namespace WebApi.Controllers
             }
             catch (Exception)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while updating the user.");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while updating the user. Review the input data");
             }
         }
 
