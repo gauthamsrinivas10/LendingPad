@@ -63,11 +63,10 @@ namespace Data.Repositories
 
             if (string.IsNullOrEmpty(tag))
             {
-                // Query for users whose tags are either null or an empty array
-                var query = _documentSession.Query<User, UsersListIndex>()
-                                            .Where(x => x.Tags == null || !x.Tags.Any());  // Handle both null and empty arrays
+                // Query for users when tag is not passed and return all users
+                var query = _documentSession.Query<User, UsersListIndex>();
 
-                return query.ToList();  // Return the list of users with no tags
+                return query.ToList();  // Return the list of users when queries with no tags
             }
 
             // If a specific tag is provided, return users with that tag.
