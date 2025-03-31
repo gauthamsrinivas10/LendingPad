@@ -13,5 +13,8 @@ namespace Core.Services.Orders
         void DeleteOrder(Guid orderId);
         IEnumerable<Order> GetAllOrders();
         IEnumerable<Order> GetOrderByName(string filter);
+        void AddOrders(IEnumerable<Order> orders);
+        decimal CalculateTotalCostOfAllOrders();
+
     }
 }

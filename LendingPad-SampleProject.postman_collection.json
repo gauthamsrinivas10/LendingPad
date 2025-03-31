@@ -505,6 +505,33 @@
 								"url": "http://localhost:49834/orders/a9a3d2f4-ba5b-4d63-bf9e-39d1fcd97b79/DeleteOrder"
 							},
 							"response": []
+						},
+						{
+							"name": "createMultipleOrderAtOnce",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"orderNumber\": \"1\",\r\n        \"orderDate\": \"2025-03-30T00:00:00Z\",\r\n        \"customerName\": \"Peter John\",\r\n        \"products\": [\r\n            {\r\n                \"name\": \"Gucci Handbag\",\r\n                \"price\": 18.2,\r\n                \"description\": \"Regular handbag\",\r\n                \"quantity\": 10\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"orderNumber\": \"2\",\r\n        \"orderDate\": \"2025-03-31T00:00:00Z\",\r\n        \"customerName\": \"Jane Smith\",\r\n        \"products\": [\r\n            {\r\n                \"name\": \"Louis Vuitton\",\r\n                \"price\": 80,\r\n                \"description\": \"Luxury handbag\",\r\n                \"quantity\": 5\r\n            }\r\n        ]\r\n    }\r\n]\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:49834/orders/createMultipleOrder"
+							},
+							"response": []
+						},
+						{
+							"name": "GetTotalCostOfAllOrders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:49834/orders/GetTotalCostOfAllOrders"
+							},
+							"response": []
 						}
 					]
 				}

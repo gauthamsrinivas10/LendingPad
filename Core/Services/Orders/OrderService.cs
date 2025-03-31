@@ -2,6 +2,7 @@
 using Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Core.Services.Orders
@@ -64,5 +65,21 @@ namespace Core.Services.Orders
                 throw new InvalidOperationException($"Order with ID {orderId} not found.");
             }
         }
+
+        public void AddOrders(IEnumerable<Order> orders)
+        {
+            foreach(var order in orders)
+            {
+                _orders.Add(order);
+            }
+
+        }
+
+        public decimal CalculateTotalCostOfAllOrders()
+        {
+            return _orders.Sum(order => order.Total);
+        }
+
+       
     }
 }
