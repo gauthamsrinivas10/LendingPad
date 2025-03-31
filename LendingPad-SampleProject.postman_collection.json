@@ -156,7 +156,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:49834/users/list/tag?tag=C",
+							"raw": "http://localhost:49834/users/list/tag?tag=D",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -170,19 +170,10 @@
 							"query": [
 								{
 									"key": "tag",
-									"value": "C"
+									"value": "D"
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:49834/users/list"
 					},
 					"response": []
 				}
